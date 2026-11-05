@@ -9,11 +9,22 @@ class EquipeModel {
     required this.cidadeEquipe,
   });
 
+  static int? _parseId(dynamic value) {
+    if (value is int) return value;
+    if (value is num) return value.toInt();
+    return int.tryParse(value?.toString() ?? '');
+  }
+
   factory EquipeModel.fromJson(Map<String, dynamic> json) {
     return EquipeModel(
-      idEquipe: json['idEquipe'] ?? json['id'],
-      nomeEquipe: json['nomeEquipe'] ?? json['nome'] ?? '',
-      cidadeEquipe: json['cidadeEquipe'] ?? json['cidade'] ?? '',
+      idEquipe: _parseId(
+        json['idEquipe'] ??
+            json['id_equipe'] ??
+            json['id_equipe_fk'] ??
+            json['id'],
+      ),
+      nomeEquipe: (json['nomeEquipe'] ?? json['nome'] ?? '').toString(),
+      cidadeEquipe: (json['cidadeEquipe'] ?? json['cidade'] ?? '').toString(),
     );
   }
 

@@ -30,14 +30,36 @@ class PartidaModel {
 
   factory PartidaModel.fromJson(Map<String, dynamic> json) {
     return PartidaModel(
-      idPartida: _parseInt(json['idPartida'] ?? json['id']),
+      idPartida: _parseInt(
+        json['idPartida'] ??
+            json['id_partida'] ??
+            json['partida_id'] ??
+            json['id_jogo'] ??
+            json['id'],
+      ),
       dataPartida: json['dataPartida']?.toString() ?? '',
-      placarEquipeCasa: _parseInt(json['placarCasa'] ?? json['placarEquipeCasa']),
-      placarEquipeVisitante: _parseInt(json['placarVisitante'] ?? json['placarEquipeVisitante']),
-      idEquipeCasa: json['equipeCasa'] is int ? json['equipeCasa'] : _parseInt(json['idEquipeCasa']),
-      idEquipeVisitante: json['equipeVisitante'] is int ? json['equipeVisitante'] : _parseInt(json['idEquipeVisitante']),
-      equipeCasaNome: json['equipeCasa'] is String ? json['equipeCasa'] : (json['nomeEquipeCasa']?.toString() ?? 'Equipe Casa'),
-      equipeVisitanteNome: json['equipeVisitante'] is String ? json['equipeVisitante'] : (json['nomeEquipeVisitante']?.toString() ?? 'Equipe Visitante'),
+      placarEquipeCasa: _parseInt(
+        json['placarCasa'] ?? json['placarEquipeCasa'],
+      ),
+      placarEquipeVisitante: _parseInt(
+        json['placarVisitante'] ?? json['placarEquipeVisitante'],
+      ),
+      idEquipeCasa: _parseInt(
+        json['idEquipeCasa'] ??
+            json['id_equipe_casa'] ??
+            (json['equipeCasa'] is num ? json['equipeCasa'] : 0),
+      ),
+      idEquipeVisitante: _parseInt(
+        json['idEquipeVisitante'] ??
+            json['id_equipe_visitante'] ??
+            (json['equipeVisitante'] is num ? json['equipeVisitante'] : 0),
+      ),
+      equipeCasaNome: json['equipeCasa'] is String
+          ? json['equipeCasa']
+          : (json['nomeEquipeCasa']?.toString() ?? ''),
+      equipeVisitanteNome: json['equipeVisitante'] is String
+          ? json['equipeVisitante']
+          : (json['nomeEquipeVisitante']?.toString() ?? ''),
     );
   }
 }

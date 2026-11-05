@@ -11,12 +11,23 @@ class JogadorModel {
     required this.idEquipeJogador,
   });
 
+  static int _parseInt(dynamic value) {
+    if (value is int) return value;
+    if (value is num) return value.toInt();
+    return int.tryParse(value?.toString() ?? '') ?? 0;
+  }
+
   factory JogadorModel.fromJson(Map<String, dynamic> json) {
     return JogadorModel(
-      idJogador: json['idJogador'] ?? json['id'],
-      nomeJogador: json['nomeJogador'] ?? json['nome'] ?? '',
-      posicaoJogador: json['posicaoJogador'] ?? json['posicao'] ?? '',
-      idEquipeJogador: json['idEquipeJogador'] ?? json['id_equipe_fk'] ?? 0,
+      idJogador: _parseInt(
+        json['idJogador'] ?? json['id_jogador'] ?? json['id'],
+      ),
+      nomeJogador: (json['nomeJogador'] ?? json['nome'] ?? '').toString(),
+      posicaoJogador: (json['posicaoJogador'] ?? json['posicao'] ?? '')
+          .toString(),
+      idEquipeJogador: _parseInt(
+        json['idEquipeJogador'] ?? json['id_equipe_fk'] ?? json['idEquipe'],
+      ),
     );
   }
 

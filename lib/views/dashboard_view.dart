@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
 import '../view_models/dashboard_view_model.dart';
 import 'equipe_view.dart';
 import 'jogador_view.dart';
@@ -17,7 +18,10 @@ class _DashboardViewState extends State<DashboardView> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      Provider.of<DashboardViewModel>(context, listen: false).carregarDashboard();
+      Provider.of<DashboardViewModel>(
+        context,
+        listen: false,
+      ).carregarDashboard();
     });
   }
 
@@ -42,9 +46,18 @@ class _DashboardViewState extends State<DashboardView> {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(titulo, style: const TextStyle(color: Colors.grey, fontSize: 14)),
+                Text(
+                  titulo,
+                  style: const TextStyle(color: Colors.grey, fontSize: 14),
+                ),
                 const SizedBox(height: 4),
-                Text(valor, style: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold)),
+                Text(
+                  valor,
+                  style: const TextStyle(
+                    fontSize: 22,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
               ],
             ),
           ],
@@ -72,7 +85,14 @@ class _DashboardViewState extends State<DashboardView> {
                 children: [
                   Icon(Icons.sports_soccer, size: 48, color: Colors.amber),
                   SizedBox(height: 8),
-                  Text("Sistema Campeonato", style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold)),
+                  Text(
+                    "Sistema Campeonato",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -81,7 +101,10 @@ class _DashboardViewState extends State<DashboardView> {
               title: const Text("Equipes"),
               onTap: () {
                 Navigator.pop(context);
-                Navigator.push(context, MaterialPageRoute(builder: (_) => const EquipeView()));
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (_) => const EquipeView()),
+                );
               },
             ),
             ListTile(
@@ -89,7 +112,10 @@ class _DashboardViewState extends State<DashboardView> {
               title: const Text("Jogadores"),
               onTap: () {
                 Navigator.pop(context);
-                Navigator.push(context, MaterialPageRoute(builder: (_) => const JogadorView()));
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (_) => const JogadorView()),
+                );
               },
             ),
             ListTile(
@@ -97,7 +123,10 @@ class _DashboardViewState extends State<DashboardView> {
               title: const Text("Partidas"),
               onTap: () {
                 Navigator.pop(context);
-                Navigator.push(context, MaterialPageRoute(builder: (_) => const PartidaView()));
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (_) => const PartidaView()),
+                );
               },
             ),
           ],
@@ -113,10 +142,30 @@ class _DashboardViewState extends State<DashboardView> {
             child: ListView(
               padding: const EdgeInsets.only(top: 16),
               children: [
-                _buildCard("Total de Equipes", "${vm.totalEquipes}", Icons.groups, Colors.amber[800]!),
-                _buildCard("Total de Jogadores", "${vm.totalJogadores}", Icons.person, Colors.amber[800]!),
-                _buildCard("Total de Partidas", "${vm.totalPartidas}", Icons.sports_soccer, Colors.amber[800]!),
-                _buildCard("Gols Marcados", "${vm.golsMarcados}", Icons.emoji_events, Colors.amber[800]!),
+                _buildCard(
+                  "Total de Equipes",
+                  "${vm.totalEquipes}",
+                  Icons.groups,
+                  Colors.amber[800]!,
+                ),
+                _buildCard(
+                  "Total de Jogadores",
+                  "${vm.totalJogadores}",
+                  Icons.person,
+                  Colors.amber[800]!,
+                ),
+                _buildCard(
+                  "Total de Partidas",
+                  "${vm.totalPartidas}",
+                  Icons.sports_soccer,
+                  Colors.amber[800]!,
+                ),
+                _buildCard(
+                  "Gols Marcados",
+                  "${vm.golsMarcados}",
+                  Icons.emoji_events,
+                  Colors.amber[800]!,
+                ),
               ],
             ),
           );
